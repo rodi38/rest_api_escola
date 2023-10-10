@@ -24,14 +24,15 @@ class UserController {
   async show(req, res) {
     try {
       if (!req.params.id) {
-        return res.status(400).json({
-          error: 'Usuario não encontrado',
+        return res.status(404).json({
+          errors: ['id não enviado'],
         });
       }
       const user = await User.findByPk(req.params.id);
+
       if (!user) {
         return res.status(404).json({
-          error: 'Usuario não encontrado',
+          errors: ['Usuario não encontrado'],
         });
       }
 
@@ -80,7 +81,7 @@ class UserController {
           errors: ['Usuario não encontrado'],
         });
       }
-      user.destroy();
+      await user.destroy();
       return res.json({
         msg: 'Usuario deletado com sucesso',
         user,
