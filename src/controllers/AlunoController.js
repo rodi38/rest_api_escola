@@ -53,7 +53,7 @@ class AlunoController {
         updatedAluno,
       });
     } catch (e) {
-      return res.status(401).json({
+      return res.status(400).json({
         errors: ['erro'],
       });
     }
